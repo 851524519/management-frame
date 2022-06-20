@@ -1,18 +1,36 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h2>HOME</h2>
+    <p>{{ name }}</p>
+    <p>{{ age }}</p>
+    <p @click="changeName">修改名字</p>
+    <p @click="changeAge">修改年龄</p>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import {  
+  mapState,
+  mapGetters,
+  mapMutations,
+  mapActions
+} from 'vuex'
 export default {
   name: 'HomeView',
-  components: {
-    HelloWorld
+  computed: {
+    ...mapState(['name', 'age']),
+    ...mapGetters(['getName', 'getAge'])
+  },
+  mounted() {
+  },
+  methods: {
+    ...mapMutations(['setName', 'setAge']),
+    changeName() {
+      this.setName('qiang')
+    },
+    changeAge() {
+      this.setAge(16)
+    }
   }
 }
 </script>
